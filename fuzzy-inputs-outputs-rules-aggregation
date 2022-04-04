@@ -1,0 +1,144 @@
+[System]
+Name='smart_home'
+Type='mamdani'
+Version=2.0
+NumInputs=5
+NumOutputs=6
+NumRules=25
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='temperature'
+Range=[-10 23]
+NumMFs=5
+MF1='verycold':'trimf',[-10,-5,0]
+MF2='cold':'trimf',[-6,0,5]
+MF3='moderate':'trimf',[0,5,10]
+MF4='hot':'trimf',[5,10,15]
+MF5='veryhot':'trimf',[10,16,23]
+
+[Input2]
+Name='flow'
+Range=[-2 4]
+NumMFs=3
+MF1='slow':'trimf', [-2 -1 0]
+MF2='moderate':'trapmf', [-1 0.45 1.45 3]
+MF3='fast':'trimf',[2.01 3.01 4.01]
+
+[Input3]
+Name='(Smoke/steam)'
+Range=[0 1800]
+NumMFs=5
+MF1='verylow':'gaussmf', [-180 38.42]
+MF2='low':'gaussmf',[149 374]
+MF3='medium':'gaussmf', [104 726]
+MF4='high':'gaussmf', [167 1019]
+MF5='veryhigh':'gaussmf', [132 1516]
+
+[Input4]
+Name='outdoor_light'
+Range=[0 250]
+NumMFs=5
+MF1='verylow':'trapmf', [-12.9 5.06 27.9 54.8]
+MF2='low':'trimf',[39.1 64.1 89.1]
+MF3='medium':'trimf', [75.5 104 138]
+MF4='bright':'trimf', [117 146.3 178]
+MF5='verybight':'trapmf', [160 190 219.9 252]
+
+[Input5]
+Name='indoor_light_ambience'
+Range=[0 100]
+NumMFs=2
+MF1='low':'trimf', [1.14 30.9 59.7]
+MF2='high':'trimf', [39.6 69.45 99]
+
+====================================================
+[Output1]
+Name='shower'
+Range=[0 35]
+NumMFs=3
+MF1='cold':'gaussmf', [3.64 6.715]
+MF2='moderate':'gaussmf', [3.07 16.75]
+MF3='hot':'gaussmf', [3.182 26.7]
+
+[Output2]
+Name='valve(cold)'
+Range=[-1.5 2.5]
+NumMFs=5
+MF1='close_fast':'trimf', [-1.45 -0.975 -0.7148]
+MF2='close_slow':'trimf', [-0.707 -0.3275 0.123]
+MF3='Normal':'trimf', [0.1373 0.4756 0.8876]
+MF4='open_slow':'trimf', [0.93 1.29 1.708]
+MF5='open_fast':'trimf',[ [1.67 2.018 2.5]
+
+[Output3]
+Name='valve(hot)'
+Range=[-1.5 2.5]
+NumMFs=5
+MF1='close_fast':'trimf', [-1.5 -1.13 -0.792]
+MF2='close_slow':'trimf', [-0.799 -0.4401 -0.102]
+MF3='normal':'trimf', [-0.05285 0.3979 0.7713]
+MF4='open_slow':'trimf', [0.8385 1.159 1.572]
+MF5='open_fast':'trimf', [1.62 2.018 2.5]
+
+[Output4]
+Name='cookerhood_extractor'
+Range=[0 1200]
+NumMFs=4
+MF1='off':'gaussmf', [16.34 -0.149]
+MF2='OFF':'gaussmf',[87.3 236]
+MF3='ON':'gaussmf', [103.1 549.1]
+MF4='OFF':'gaussmf', [107.3 927.8]
+
+[Output5]
+Name='lamps'
+Range=[0 250]
+NumMFs=5
+MF1='very_low':'gbellmf', [10.45 3.278 22.08]
+MF2='dim':'gbellmf', [10.66 3.278 64.87]
+MF3='medium':'gbellmf', [12.09 3.278 109.2]
+MF4='bright':'gbellmf',[14.3 3.28 162]
+MF5='very_bright':'gbellmf', [13.42 3.278 218.7]
+
+[Output6]
+Name='AC/heater'
+Range=[-5 30]
+NumMFs=3
+MF1='cold':'gaussmf',[3.32 2.89]
+MF2='moderate':'gaussmf', [2.8 12.5]
+MF3='hot':'gaussmf',  [4.76 22.14]
+
+=============================================================
+
+[Rules]
+0 0 0 0 1 1, 0 0 0 0 5 (1) : 1
+[1,1,0,0,0],[3,0,3,0,0,0] (1) : 1
+[1,2,0,0,0],[3,2,3,0,0,0] (1) : 1
+[2,3,0,0,0],[3,2,5,0,0,0] (1) : 1
+[3,3,0,0,0],[2,4,2,0,0,0] (1) : 1
+[4,1,0,0,0],[1,4,1,0,0,0] (1) : 1
+[5,3,0,0,0],[1,5,1,0,0,0] (1) : 1
+[1,3,0,0,0],[3,1,5,0,0,0] (1) : 1
+[4,2,0,0,0],[1,4,2,0,0,0] (1) : 1
+[0,0,1,0,0],[0,0,0,2,0,0] (1) : 1
+[0,0,2,0,0],[0,0,0,3,0,0] (1) : 1
+[0,0,3,0,0],[0,0,0,3,0,0] (1) : 1
+[0,0,5,0,0],[0,0,0,4,0,0] (1) : 1
+[0,0,0,1,1],[0,0,0,0,3,0] (1) : 1
+[0,0,0,4,1],[0,0,0,0,5,0] (1) : 1
+[0,0,0,-4,1],[0,0,0,0,2,0] (1) : 1
+[0,0,0,3,-1],[0,0,0,0,4,0] (1) : 1
+[0,0,0,5,-2],[0,0,0,0,1,0] (1) : 1
+[0,0,0,2,1],[0,0,0,0,5,0] (1) : 1
+[0,0,0,2,2],[0,0,0,0,1,0] (1) : 1
+[0,0,0,5,2],[0,0,0,0,1,0] (1) : 1
+[1,0,0,0,0],[0,0,0,0,0,3] (1) : 1
+[2,0,0,0,0],[0,0,0,0,0,3] (1) : 1
+[3,0,0,0,0],[0,0,0,0,0,1] (1) : 1
+[4,0,0,0,0],[0,0,0,0,0,2] (1) : 1
+[5,0,0,0,0],[0,0,0,0,0,1] (1) : 1
+
