@@ -7,3 +7,6 @@ Reviews make a great distinction in how consumers/customers/users feel about a p
  The problem is how do they understand how the customers or employees really feel based on these reviews recorded as “pros” and “cons”.
 
 Keywords: Topic modelling, Latent Dirichlet Allocation (LDA), Latent Semantic Analysis (LSA), positive reviews (pros), staffs, customers.
+
+FUZZY_LOGIC_CONTROLLER_DESIGN
+In this second task I will be using the MATLAB fuzzy toolbox, Mamdani fuzzy inference system to be precise. Five inputs; temperature, flow of water in pipes, smoke/steam detectors in kitchen, outdoor & indoor light ambience, and 6 outputs; shower temperature, cold & hot valves, extraction fan in kitchen, indoor light and finally the AC/ heater was implemented.
