@@ -1,3 +1,4 @@
+fuzzy-inputs-outputs-rules-aggregation
 [System]
 Name='smart_home'
 Type='mamdani'
